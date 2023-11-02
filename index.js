@@ -1,8 +1,14 @@
 /*
-    # Tugas Sesi 3
-    1. Buat fungsi untuk mengupdate data user berdasarkan id
-        - value yang di update adalah name dan email
-    2. Buat fungsi untuk menghapus data user berdasarkan id
+    # Tugas Sesi 4
+    1. Buat api delete user.
+    2. Modifikasi api create user, update user
+        - response yang di berikan adalah data user detail yang di create / update.
+    3. buat Api login dengan sepesifikasi berikut :
+       - path yang dibuat /login
+       - method post
+       - request body yang diberikan email dan password.
+       - jika cocok email dan password maka berikan response data user tersebut.
+       - bila tidak cocok maka berikan response dengan message "email atau password salah".
     3. buat table tasks dengan kolom : 
         - task_id (int)
         - user_id (int)
@@ -12,13 +18,17 @@
     4. Buat fungsi Create, Read, update dan delete untuk table tasks diatas;
 */
 import * as UserService from './services/user.js';
+import express from 'express';
 
-console.log("jalankan function create data");
-await UserService.cerateUser("Rovi", "Rovi@gmail.com", "pass1234")
-console.log("jalankan fungsi get data");
+const host = "localhost";
+const port = 8080;
+const app = express();
+app.use(express.json());
+app.get("/users", UserService.getUser);
+app.post("/users", UserService.cerateUser);
+app.put("/users/:id", UserService.updateUser);
+app.delete("users/:id", );
 
-await UserService.getUser();
-
-console.log("jalankan fungi get detail");
-
-await UserService.getUserById(3);
+app.listen(port, host, () => {
+    console.log(`server berjalan di http://${host}:${port}`);
+});

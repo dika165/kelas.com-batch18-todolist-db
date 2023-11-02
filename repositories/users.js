@@ -20,4 +20,12 @@ const getDataById = (id) => {
     return dbPool.query(query,[id]);
 }
 
-export { createData, getData, getDataById }
+const updateData = (id, name, email) => {
+    let updatedAt = new Date();
+    const query = "UPDATE users SET name = ?, email = ?, updated_at = ? WHERE user_id=?";
+    const values = [name, email, updatedAt, id];
+
+    return dbPool.query(query,values);
+}
+
+export { createData, getData, getDataById, updateData }
