@@ -28,4 +28,10 @@ const updateData = (id, name, email) => {
     return dbPool.query(query,values);
 }
 
-export { createData, getData, getDataById, updateData }
+const getDataByEmail = (email) => {
+    const query = "SELECT user_id, name, email, password, created_at FROM users where email=?";
+
+    return dbPool.query(query,[email]);
+}
+
+export { createData, getData, getDataById, updateData, getDataByEmail }
